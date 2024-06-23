@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Community Service</title>
+    <style>
+        #service-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            display: none; /* Hide by default */
+        }
+    </style>
+</head>
+<body>
+    <div id="service-menu">
+        <p id="actions-remaining">Actions Remaining: </p>
+        <p id="start-time">Start Time: </p>
+        <p id="assigned-by">Assigned By: </p>
+        <p id="reason">Reason: </p>
+    </div>
+    <script>
+        window.addEventListener('message', function(event) {
+            var data = event.data;
+            var serviceMenu = document.getElementById('service-menu');
+
+            if (data.showMenu === true) {
+                serviceMenu.style.display = 'block';
+                document.getElementById('actions-remaining').textContent = "Taken: " + data.actionsRemaining;
+                document.getElementById('start-time').textContent = "Begin Tijd: " + data.startTime;
+                document.getElementById('assigned-by').textContent = "Gegeven door: " + data.assignedBy;
+                document.getElementById('reason').textContent = "Reden: " + data.reason;
+            } else if (data.showMenu === false) {
+                serviceMenu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
